@@ -32,7 +32,36 @@ This bot implements the powerful SMC combination:
 - MetaTrader 5 platform installed
 - MT5 trading account
 
-### Setup
+### Platform-Specific Setup
+
+#### **Linux Users (MT5 on Wine)**
+
+If you're running MT5 on Linux with Wine, use the automated installation:
+
+```bash
+chmod +x scripts/install_linux.sh
+./scripts/install_linux.sh
+```
+
+Then follow the quick start:
+
+```bash
+# 1. Configure credentials
+nano .env
+
+# 2. Start MT5
+./scripts/start_mt5.sh
+
+# 3. Test connection
+./scripts/test_mt5_connection.sh
+
+# 4. Run bot
+./scripts/run_bot.sh
+```
+
+**📖 For detailed Linux/Wine setup instructions, see [LINUX_SETUP.md](LINUX_SETUP.md)**
+
+#### **Windows Users**
 
 1. Clone the repository:
 ```bash
@@ -47,7 +76,7 @@ pip install -r requirements.txt
 
 3. Configure your MT5 account:
 ```bash
-cp .env.example .env
+copy .env.example .env
 # Edit .env with your MT5 credentials and trading parameters
 ```
 
@@ -68,21 +97,28 @@ Edit `.env` file to customize:
 
 ```
 SMC_DGA/
-├── main.py                 # Main bot runner
-├── config.py              # Configuration loader
-├── requirements.txt       # Python dependencies
-├── .env.example          # Environment template
-├── .env                  # Your configuration (create from .env.example)
+├── main.py                      # Main bot runner
+├── config.py                    # Configuration loader
+├── requirements.txt             # Python dependencies
+├── .env.example                # Environment template
+├── README.md                    # This file
+├── LINUX_SETUP.md              # Detailed Linux/Wine setup guide
 ├── mt5/
-│   └── connection.py     # MT5 connection handler
+│   └── connection.py           # MT5 connection handler
 ├── strategy/
-│   ├── order_blocks.py   # Order Block detection
-│   ├── liquidity.py      # Liquidity pool identification
-│   ├── fvg.py           # Fair Value Gap detection
-│   ├── bos.py           # Break of Structure detection
-│   └── smc_strategy.py  # Main trading strategy
-└── risk/
-    └── management.py     # Risk and position management
+│   ├── order_blocks.py         # Order Block detection
+│   ├── liquidity.py            # Liquidity pool identification
+│   ├── fvg.py                 # Fair Value Gap detection
+│   ├── bos.py                 # Break of Structure detection
+│   └── smc_strategy.py        # Main trading strategy
+├── risk/
+│   └── management.py           # Risk and position management
+└── scripts/                     # Helper scripts (Linux/Wine)
+    ├── install_linux.sh        # Automated Linux installation
+    ├── start_mt5.sh            # Start MT5 in Wine
+    ├── run_bot.sh              # Run the trading bot
+    ├── test_mt5_connection.sh  # Test MT5 connection
+    └── stop_bot.sh             # Stop bot and MT5
 ```
 
 ## How It Works
